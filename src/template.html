@@ -2,33 +2,57 @@
 <html>
   <head>
     <title>Blackjack</title>
-    <link rel="stylesheet" href="mystyles.css">
+    <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-  <body> 
-    <div class="layout">
-      <h2 id="dealer-header">Dealer hand</h2>
-      <div class="wrapper">
-        <div class="cards" id="dealer"></div> 
+  <body>
+
+    <div class="section" id="bank">
+      <div id="bet-label">
+        Click to place your bet and deal cards
       </div>
-      <h2 id="player-header">Player hand</h2>
-      <div class="wrapper">
-        <div class="cards" id="player"></div>
-      </div>
-      <div class="bank">
-        <form action="#" id="bank-form"> 
-          <label for="bet" id="bet-label">Place your bet</label>
-          <img src="./assets/blue_chip.jpeg" class="chip">
-          <input type="number" id="bet" min="0" max="50" step="25" placeholder="$"/>
-        </form>
-        <p id="amount"></p>
-      </div>
-      <div id="button-container">
-        <button id="hit-button">Hit</button>
-        <button id="pass-button">Stand</button>
-        <button id="next-hand-button" onclick="checkBet()">Deal</button>
+      <div id="chips">
+        <div class="chip-container">
+          <img src="./assets/black_chip.png" class="chip" id="black-chip">
+          <span class="textbubble">$1</span>
+        </div>
+        <div class="chip-container">
+          <img src="./assets/blue_chip.png" class="chip" id="blue-chip">
+          <span class="textbubble">$5</span>
+        </div>
+        <div class="chip-container">
+          <img src="./assets/red_chip.png" class="chip" id="red-chip">
+          <span class="textbubble">$25</span>
+        </div>
       </div>
     </div>
+
+    <div class="section" id="board">
+      <div id="dealer-hand">
+        <div class="header">
+          Dealer Hand
+        </div>
+        <div class="cards" id="dealer-cards"></div>
+      </div>
+      <div id="player-hand">
+        <div class="header">
+          Player Hand
+        </div>
+        <div class="cards" id="player-cards"></div>
+      </div>
+      <div id="balance">
+        Bet:<br>
+        Balance: $200
+      </div>
+    </div>
+
+    <div class="section" id="buttons">
+      <button id="hit">HIT</button>
+      <button id="stand">STAND</button>
+      <button id="double">DOUBLE</button>
+      <button id="split">SPLIT</button>
+    </div>
+
     <script src="../dist/main.js"></script>
   </body>
 </html>

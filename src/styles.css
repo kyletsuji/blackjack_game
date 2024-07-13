@@ -1,40 +1,88 @@
-/* background */
-html {
-  text-align: center;
-}
 body {
-  margin: 0;
-  padding: 0;
-  background-image: url('assets/las_vegas.jpeg');
-  height: 100vh;
-  width: 100vw;
+  background-image: url('./assets/las_vegas.jpeg');
   background-size: cover;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 1.3rem;
-  color:black;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: white;
-  background-repeat:inherit;
-  letter-spacing: .7rem;
-  text-transform: uppercase;
+  background-repeat: no-repeat;
+  /* background-position: center center; */
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
 }
 
-/* headers */
-#dealer-header, #player-header, #hit-button, #pass-button{
-  display: none;
-  margin-bottom: 1rem;
-  margin-top: 1.5rem;
+.section {
+  background-color: rgba(0, 200, 0, 0.5);
+  border-radius: 1rem;
+  margin: 2rem 1rem 2rem 1rem;
 }
-.wrapper{
-  margin: auto;
-  width: fit-content;
+
+/* bank */
+.bank{
+  flex: 20%;
+}
+#black-chip {
+  width: 5.5rem;
+}
+#blue-chip {
+  width: 5.3rem;
+}
+#red-chip {
+  width: 5.8rem;
+}
+#chips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chip:hover {
+  cursor: pointer;
+}
+.chip {
+  margin: .5rem;
+  opacity: 1;
+}
+#bet-label {
+  margin: 1rem;
+  text-align: center;
+  opacity: 1;
+}
+#balance {
+  margin: 1rem;
   text-align: center;
 }
+.chip-container .textbubble {
+  visibility: hidden;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.chip-container:hover .textbubble {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+
+/* board */
+#board {
+  flex: 60%;
+}
+.header {
+  text-align: center;
+}
+#dealer-hand, #player-hand {
+  height: 40%;
+}
 .card {
+  animation: deal-card 1s forwards;
   background-color: white;
   border-radius: 4%;
   height: 100%;
-  width: 100px;
+  width: 90px;
   box-shadow: 5px 5px 3px 3px;
   border: 2px outset;
 }
@@ -46,124 +94,46 @@ body {
   justify-content: center;
 }
 .back {
-  height: 145px;
-  width: 100px;
+  height: 128px;
+  width: auto;
+  animation: deal-card 1s forwards;
+  background-color: white;
+  border-radius: 4%;
+  box-shadow: 5px 5px 3px 3px;
+  border: 2px outset;
 }
-.hidden {
-  display: none;
-}
-/* label {
-  align-items: center;
-  display: flex;
-} */
 
-/* form */
-.bank {
-  display: flex;
-  justify-content: center;
-  padding: 1rem 1rem 0rem 1rem;
-  gap: .8rem;
-}
-#bank-form{
-  font-size: 2rem;
-  display: flex;
-  color: black;
-  gap: 1rem;
-  margin: 1rem;
-}
-#amount {
-  font-size: 2rem;
-  margin: 1rem;
-}
-#bet {
-  color: black;
-  -webkit-text-stroke-color: transparent;
-  text-align: center;
-  font-size: 2rem;
-  border-radius: 1rem;
-}
+
+
 
 
 /* buttons */
+#buttons {
+  flex: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  visibility: hidden;
+  opacity: 0;
+}
 button {
-  /* height: 50%; */
-  /* width: fit-content; */
-  padding:15px 15px 15px 15px;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  letter-spacing: .3rem;
-  text-transform: uppercase;
-  border: .3rem inset white;
-  font-weight: 700;
-}
-#button-container {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  font-size: 1.5rem;
-  -webkit-text-stroke-color: transparent;
-}
-#deal-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  -webkit-text-stroke-color: transparent;
-}
-
-/* #next-hand-button {
-  font-variant:small-caps;
-  text-transform: lowercase;
-  color: black;
-  -webkit-text-stroke-color: transparent;
-  letter-spacing: .1em;
-} */
-#next-hand-button:hover, #hit-button:hover {
-  color: white;
-  background-color: green;
-  border-color: green;
-}
-#pass-button:hover {
-  color: white;
-  background-color: red;
-  border-color: red;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 button:hover {
   cursor: pointer;
 }
 
 
-/* chip */
 
-.chip {
-  
-}
-
-/* #player-header, #dealer-header {
-  display: none;
-} */
-
-
-/* #button-container {
-  position: absolute;
-  right: 450px;
-  bottom: 80px;
-} */
-/* #next-hand-button {
-  position: absolute;
-  left: 450px;
-  bottom: 80px;
-} */
-
-/* media screen */
-
-@media screen and (max-width: 768px) {
-  .card{
-    width: 100px;
-    height: auto;
+/* animations */
+@keyframes deal-card {
+  0% {
+    transform: translateX(-200px) rotate(-90deg);
   }
-  .back {
-    width: 100px;
-    height: 145px;
+  100% {
+    transform: translateX(0) rotate(0);
   }
 }
