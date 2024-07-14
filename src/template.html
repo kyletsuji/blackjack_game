@@ -30,28 +30,36 @@
     <div class="section" id="board">
       <div id="dealer-hand">
         <div class="header">
-          Dealer Hand
+          DEALER HAND
         </div>
         <div class="cards" id="dealer-cards"></div>
       </div>
       <div id="player-hand">
         <div class="header">
-          Player Hand
+          PLAYER HAND
         </div>
         <div class="cards" id="player-cards"></div>
       </div>
       <div id="balance">
-        Bet:<br>
-        Balance: $200
+        BET:<br>
+        BALANCE: $200
       </div>
     </div>
 
     <div class="section" id="buttons">
+      <div id="bet-label">
+        Dealer must draw to 16 and stand on all 17s
+      </div>
       <button id="hit">HIT</button>
       <button id="stand">STAND</button>
       <button id="double">DOUBLE</button>
-      <button id="split">SPLIT</button>
+      <!-- <button id="split">SPLIT</button> -->
     </div>
+
+    <!-- <div id="alert-container">
+      <span id="alert" onclick="this.parentElement.style.display='none';">&times;</span>
+      This is an alert box.
+    </div> -->
 
     <script src="../dist/main.js"></script>
   </body>

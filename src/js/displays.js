@@ -1,4 +1,3 @@
-import {deck, createDeck, shuffle, values} from './deck.js';
 
 function createCard(card, playerDealer) {
   const newCardModel = document.createElement('img');
@@ -19,8 +18,7 @@ function createBack() {
 function hide(element) {
   var el = document.getElementById(element);
   if (el) {
-    // el.style.visibility = "hidden";
-    el.style.transition = "opacity 1s";
+    el.style.transition = "opacity .5s";
     el.style.opacity = "0";
   }
   else {
@@ -31,7 +29,7 @@ function hide(element) {
 function show(element) {
   var el = document.getElementById(element);
   el.style.visibility = "visible";
-  el.style.transition = "opacity 1s";
+  el.style.transition = "opacity .5s";
   el.style.opacity = "1";
 }
 
@@ -40,5 +38,14 @@ function clearBoard() {
   document.getElementById('player-cards').innerHTML = '';
 }
 
+function remove(element) {
+  var el = document.getElementById(element);
+  el.style.display = "none";
+}
 
-export {hide, createCard, createBack, show, clearBoard};
+function display(element) {
+  var el = document.getElementById(element);
+  el.style.display = "flex";
+}
+
+export {hide, createCard, createBack, show, clearBoard, remove, display};

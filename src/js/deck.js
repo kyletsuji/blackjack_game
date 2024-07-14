@@ -1,5 +1,4 @@
 let deck = [];
-// let proceed = true;
 
 const values = new Map([
   ['2', 2],
@@ -39,9 +38,6 @@ function createDeck() {
 }
 
 function shuffle() {
-  // if (!proceed) {
-  //   return;
-  // }
   let current = deck.length-1, random;
   while (current >= 0) {
     random = Math.floor(Math.random() * current);

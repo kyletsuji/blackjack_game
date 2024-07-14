@@ -5,6 +5,10 @@ function setBet(value) {
   bet = value;
 }
 
+function getBet() {
+  return '$' + bet;
+}
+
 function doubleBet() {
   bet += bet;
 }
@@ -17,9 +21,27 @@ function addBet() {
   balance += bet;
 }
 
+function hasEnough() {
+  if (bet > balance) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function canDouble() {
+  if (bet * 2 > balance) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
 function updateBalance() {
-  document.getElementById('balance').innerHTML = "Bet: $" + bet + "<br> Balance: " + balance;
+  document.getElementById('balance').innerHTML = "BET: $" + bet + "<br> BALANCE: $" + balance;
 }
 
 
-export {setBet, updateBalance, subtractBet, addBet, doubleBet}
+export {setBet, updateBalance, subtractBet, addBet, doubleBet, hasEnough, canDouble, getBet}

@@ -1,13 +1,11 @@
-import {hide, createCard, createBack, show, clearBoard} from './displays.js';
-import {deck, createDeck, shuffle, values, proceed} from './deck.js';
-import {setBet, updateBalance, subtractBet, addBet, doubleBet} from './money.js';
-import { add } from 'lodash';
+import {hide, createCard, createBack, show, clearBoard, remove} from './displays.js';
+import {deck, values} from './deck.js';
+import {updateBalance, subtractBet, addBet, doubleBet, getBet} from './money.js';
 import { toggleChips } from './index.js';
 
 let count = 0;
 let dealerHand = [];
 let playerHand = [];
-
 
 function calculate(hand) {
   let amount = 0;
@@ -36,32 +34,22 @@ function calculate(hand) {
 function getOutcome() {
   if (calculate(dealerHand) < calculate(playerHand)) {
     setTimeout(() => { 
-      alert("YOU WIN!"); 
+      alert("You won " + getBet()); 
       clearBoard();
       show('bank');
       toggleChips();
       addBet()
       updateBalance();
-      // document.getElementById("next-hand-button").style.display = "block";
-      // dollars += parseInt(bet.value);
-      // updateBank();
-      // document.getElementById("bet").style.display = "block";
-      // document.getElementById("bet-label").style.display = "flex";
     }, 1000);
   }
   else if (calculate(dealerHand) > calculate(playerHand)) {
     setTimeout(() => { 
-      alert("YOU LOSE"); 
+      alert("You lost " + getBet()); 
       clearBoard();
       show('bank');
       toggleChips();
       subtractBet();
       updateBalance();
-      // document.getElementById("next-hand-button").style.display = "block";
-      // dollars -= parseInt(bet.value);
-      // updateBank();
-      // document.getElementById("bet").style.display = "block";
-      // document.getElementById("bet-label").style.display = "flex";
     }, 1000);
   }
   else {
@@ -70,9 +58,6 @@ function getOutcome() {
       clearBoard();
       show('bank');
       toggleChips();
-      // document.getElementById("next-hand-button").style.display = "block";
-      // document.getElementById("bet").style.display = "block";
-      // document.getElementById("bet-label").style.display = "flex";
     }, 1000);
   }
 }
@@ -80,31 +65,30 @@ function getOutcome() {
 function dealCards() {
   hide('bank');
   playerHand = [deck[count++], deck[count++]];
-  playerHand.forEach((item) => {
-    createCard(item, 'player-cards');
-  });
-
   dealerHand = [deck[count++], deck[count++]];
-  dealerHand.forEach((item, index) => {
-    if (index === 1) {
-      createBack();
-    }
-    else {
-      createCard(item, 'dealer-cards');
-    }
-  });
+  createCard(playerHand[0], 'player-cards');
+  setTimeout(() => {
+    createCard(dealerHand[0], 'dealer-cards');
+  }, 300);
+  setTimeout(() => {
+    createCard(playerHand[1], 'player-cards');
+  }, 600);
+  setTimeout(() => {
+    createBack();
+  }, 900);
   show('buttons');
 }
-
 
 function hit() {
   const newCard = deck[count++];
   playerHand.push(newCard);
   createCard(newCard, 'player-cards');
   if (calculate(playerHand) > 21) {
+    remove('hit');
+    remove('stand');
     hide('buttons');
     setTimeout(() => { 
-      alert("BUST, YOU LOSE");
+      alert("BUST, you lost " + getBet());
       show('bank');
       toggleChips();
       clearBoard();
@@ -131,24 +115,17 @@ function stand() {
   } 
   else if (calculate(dealerHand) > 21) {
     setTimeout(() => { 
-      alert("DEALER BUST, YOU WIN!"); 
+      alert("DEALER BUST, you won " + getBet()); 
       show('bank');
       toggleChips();
       clearBoard();
       addBet();
       updateBalance();
-      // document.getElementById("next-hand-button").style.display = "block";
-      // dollars = dollars + parseInt(bet.value);
-      // updateBank();
-      // document.getElementById("bet").style.display = "block";
-      // document.getElementById("bet-label").style.display = "flex";
     }, 1000);
   }
   else {
     getOutcome();
   }
-  // document.getElementById("hit-button").style.display = "none";
-  // document.getElementById("pass-button").style.display = "none";
 }
 
 function double() {
